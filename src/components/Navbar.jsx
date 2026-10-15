@@ -95,6 +95,22 @@ export default function Navbar() {
         {/* Action Buttons */}
         <div className="flex items-center gap-3">
 
+          {/* Theme Toggle Button */}
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={toggleTheme}
+            className="p-2.5 rounded-lg border border-slate-200/90 dark:border-white/10 bg-slate-100/80 dark:bg-white/5 hover:bg-slate-200/80 dark:hover:bg-white/10 text-slate-700 dark:text-neutral-300 transition-all focus:outline-none cursor-pointer flex items-center justify-center"
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            title={isDark ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {isDark ? (
+              <Sun className="w-4 h-4 text-amber-400" />
+            ) : (
+              <Moon className="w-4 h-4 text-slate-800" />
+            )}
+          </motion.button>
+
           {/* WhatsApp Message CTA */}
           <motion.a
             whileHover={{ scale: 1.02 }}
@@ -148,6 +164,28 @@ export default function Navbar() {
                   </a>
                 );
               })}
+
+              {/* Mobile Theme Toggle Button */}
+              <button
+                onClick={toggleTheme}
+                className="mt-2 flex items-center justify-between py-2.5 px-3 rounded-xl border border-slate-200/90 dark:border-white/10 bg-slate-100/70 dark:bg-white/5 text-slate-800 dark:text-white text-base font-semibold transition-colors"
+                aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                <span>Appearance</span>
+                <span className="flex items-center gap-2 text-xs uppercase tracking-wider font-bold">
+                  {isDark ? (
+                    <>
+                      <Sun className="w-4 h-4 text-amber-400" />
+                      <span>Light Mode</span>
+                    </>
+                  ) : (
+                    <>
+                      <Moon className="w-4 h-4 text-slate-800" />
+                      <span>Dark Mode</span>
+                    </>
+                  )}
+                </span>
+              </button>
             </div>
           </motion.div>
         )}

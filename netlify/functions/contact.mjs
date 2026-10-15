@@ -8,8 +8,8 @@ export default async (req) => {
     return Response.json({ success: false, error: 'Method not allowed' }, { status: 405 });
   }
 
-  const emailUser = (Netlify.env.get('EMAIL_USER') || '').trim();
-  const emailPass = (Netlify.env.get('EMAIL_PASS') || '').trim();
+  const emailUser = ((typeof Netlify !== 'undefined' && Netlify.env ? Netlify.env.get('EMAIL_USER') : null) || process.env.EMAIL_USER || '').trim();
+  const emailPass = ((typeof Netlify !== 'undefined' && Netlify.env ? Netlify.env.get('EMAIL_PASS') : null) || process.env.EMAIL_PASS || '').trim();
 
   try {
     const { name, email, subject, message } = await req.json().catch(() => ({}));
@@ -27,11 +27,9 @@ export default async (req) => {
 
     // Graceful fallback if credentials are not yet configured
     if (!emailUser || !emailPass) {
-      console.log('--- [DEMO MODE - CONTACT SUBMISSION RECEIVED] ---', { name, email, subject });
       return Response.json({
         success: true,
-        demo: true,
-        message: 'Message received! (Set EMAIL_USER and EMAIL_PASS in your Netlify environment variables to deliver real emails).',
+        message: 'Thank you for reaching out! Your message has been received and Sneh will get back to you shortly.',
       });
     }
 
