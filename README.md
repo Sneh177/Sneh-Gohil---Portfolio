@@ -1,31 +1,73 @@
-🌟 My Personal Portfolio
+# 🌟 Sneh Gohil — Personal Portfolio (React + Vite)
 
-Welcome to my personal portfolio website!
-This project showcases my skills, projects, experience, and provides ways to contact me.
-It’s built to represent who I am as a developer and to give visitors a clear picture of my work.
+Modern, responsive developer portfolio converted to **React 18** and **Vite** with **Tailwind CSS**.
 
-🖥️ Tech Stack
+---
 
-Frontend: HTML5, CSS3, JavaScript 
+## 🖥️ Tech Stack
 
-Styling: Custom CSS
+- **Framework:** React 18
+- **Bundler & Dev Server:** Vite
+- **Styling:** Tailwind CSS + PostCSS + Vanilla CSS utilities
+- **Icons:** Lucide React + Custom Tech SVG Icons
+- **Typography:** Space Grotesk (Google Fonts)
 
-Deployment:  Netlify
+---
 
-Other Tools: Git, GitHub, VS Code
+## 📂 Project Structure
 
-📂 Sections
+```
+Portfolio/
+├── public/                 # Static assets (images, icons)
+│   ├── Img/
+│   │   ├── MarketStore.jpg
+│   │   └── Sneh.png
+│   ├── sneh-gohil.jpg
+│   └── diamond-website.png
+├── src/
+│   ├── components/         # Modular React components
+│   │   ├── Navbar.jsx      # Sticky glassmorphic nav & mobile drawer
+│   │   ├── Hero.jsx        # Hero section with animated morphing avatar
+│   │   ├── Experience.jsx  # Career timeline
+│   │   ├── Projects.jsx    # Featured projects with links and tags
+│   │   ├── Skills.jsx      # Essential tools with category filtering
+│   │   └── Footer.jsx      # Footer with social links & back-to-top
+│   ├── data/
+│   │   └── portfolioData.js # Centralized data configuration
+│   ├── App.jsx             # Root React application component
+│   ├── index.css           # Tailwind & custom keyframe styling
+│   └── main.jsx            # React DOM entry point
+├── index.html              # HTML entry point for Vite
+├── package.json            # Scripts & dependencies
+├── tailwind.config.js      # Tailwind configuration
+└── vite.config.js          # Vite configuration
+```
 
-About Me: A short introduction and my professional background.
+---
 
-Skills: Key technologies, languages, and tools I’m experienced with.
+## 🚀 Getting Started
 
-Projects: Showcasing my best work with live demos and GitHub links.
+### 1. Install dependencies:
+```bash
+npm install
+```
 
-Experience: Showcasing my Experience.
+### 2. Start local development server:
+```bash
+npm run dev
+```
 
-Contact: A form or links to reach me through email or social media.
+Visit `http://localhost:3000` in your browser.
 
-🌍 Live Demo
+### 3. Build for production:
+```bash
+npm run build
+```
 
-View the live site here : https://snehgohil-portfolio.netlify.app/
+The optimized production bundle will be generated in `dist/`.
+
+---
+
+## 🌍 Live Demo
+
+View the live portfolio: [https://snehgohil-portfolio.netlify.app/](https://snehgohil-portfolio.netlify.app/)
