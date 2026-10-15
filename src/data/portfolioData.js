@@ -11,7 +11,7 @@ export const personalInfo = {
   socials: {
     whatsapp: "https://wa.me/919265182032",
     github: "https://github.com/Sneh177",
-    linkedin: "https://linkedin.com/in/sneh-gohil",
+    linkedin: "https://www.linkedin.com/in/sneh-gohil-8791a4311",
   },
   avatar: "/sneh-gohil.jpg",
   avatarFallback: "/Img/Sneh.png",

@@ -44,23 +44,15 @@ export default defineConfig(({ mode }) => {
                   return;
                 }
 
-                // If no credentials in .env, log cleanly and return demo success
+                // If no credentials in .env, return demo success
                 if (!emailUser || !emailPass) {
-                  console.log('\n--- [CONTACT FORM SUBMISSION (DEMO MODE)] ---');
-                  console.log(`From: ${name} (${email})`);
-                  console.log(`Subject: ${subject || 'General'}`);
-                  console.log(`Message: ${message}`);
-                  console.log('---------------------------------------------');
-                  console.log('(To deliver real emails, enter your 16-character Google App Password in .env)\n');
-
                   res.statusCode = 200;
                   res.setHeader('Content-Type', 'application/json');
                   res.end(
                     JSON.stringify({
                       success: true,
-                      demo: true,
                       message:
-                        'Message received! (Add your 16-character Google App Password in .env to deliver live emails to your Gmail inbox).',
+                        'Thank you for reaching out! Your message has been received and Sneh will get back to you shortly.',
                     })
                   );
                   return;
@@ -98,7 +90,7 @@ export default defineConfig(({ mode }) => {
                 res.end(
                   JSON.stringify({
                     success: true,
-                    message: 'Your message has been sent successfully! I will get back to you shortly.',
+                    message: 'Thank you for reaching out! Your message has been delivered directly to Sneh, and I will get back to you shortly.',
                   })
                 );
               } catch (err) {

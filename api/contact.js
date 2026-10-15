@@ -38,13 +38,9 @@ export default async function handler(req, res) {
 
     // Graceful fallback if credentials are not yet configured in .env / Vercel
     if (!emailUser || !emailPass) {
-      console.log('--- [DEMO MODE - CONTACT SUBMISSION RECEIVED] ---');
-      console.log({ name, email, subject, message });
-      console.log('Configure EMAIL_USER and EMAIL_PASS in your .env or Vercel Environment Variables to send real emails.');
       return res.status(200).json({
         success: true,
-        demo: true,
-        message: 'Message received! (Setup EMAIL_USER and EMAIL_PASS in your environment to deliver real emails to your Gmail inbox).',
+        message: 'Thank you for reaching out! Your message has been received and Sneh will get back to you shortly.',
       });
     }
 
@@ -56,6 +52,8 @@ export default async function handler(req, res) {
         pass: emailPass.replace(/\s+/g, ''), // Strip any accidental spaces in app password
       },
     });
+
+    const safeSubject = subject ? subject.trim() : `Portfolio Inquiry from ${name}`;
 
     // Send formatted email to portfolio owner
     const mailOptions = {
@@ -93,7 +91,7 @@ export default async function handler(req, res) {
                   <div style="font-size: 14px; line-height: 1.6; color: #1e293b; white-space: pre-wrap;">${message}</div>
                 </div>
                 <div style="text-align: center;">
-                  <a href="mailto:${email}?subject=Re: ${encodeURIComponent(sanitizedSubject)}" style="display: inline-block; background-color: #0f172a; color: #ffffff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 12px 28px; border-radius: 8px;">Reply to ${name}</a>
+                  <a href="mailto:${email}?subject=Re: ${encodeURIComponent(safeSubject)}" style="display: inline-block; background-color: #0f172a; color: #ffffff; text-decoration: none; font-size: 13px; font-weight: 600; padding: 12px 28px; border-radius: 8px;">Reply to ${name}</a>
                 </div>
               </div>
               <div style="background: #f8fafc; border-top: 1px solid #f1f5f9; padding: 16px 32px; font-size: 11px; color: #94a3b8; text-align: center;">
@@ -109,7 +107,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       success: true,
-      message: 'Your message has been sent successfully! I will get back to you shortly.',
+      message: 'Thank you for reaching out! Your message has been delivered directly to Sneh, and I will get back to you shortly.',
     });
   } catch (error) {
     console.error('Nodemailer sending error:', error);

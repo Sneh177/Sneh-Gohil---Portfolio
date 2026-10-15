@@ -31,13 +31,13 @@ export default function Contact() {
 
   if (status === 'success') {
     mascotMood = 'success';
-    mascotText = 'Message sent successfully to Sneh!';
+    mascotText = 'Message sent! Thank you, Sneh will get back to you shortly.';
   } else if (status === 'loading') {
     mascotMood = 'submitting';
-    mascotText = 'Sending your message right now...';
+    mascotText = 'Delivering your message to Sneh...';
   } else if (status === 'error') {
     mascotMood = 'invalidEmail';
-    mascotText = feedbackMessage || 'Please correct the fields and try again.';
+    mascotText = feedbackMessage || 'Could not send message. Please check the details and try again.';
   } else if (focusedField === 'email' || (hasEmailInput && !focusedField)) {
     if (isEmailInvalid) {
       mascotMood = 'invalidEmail';
@@ -93,6 +93,12 @@ export default function Contact() {
       return;
     }
 
+    if (!isValidEmail(formData.email)) {
+      setStatus('error');
+      setFeedbackMessage('Please provide a valid email address so I can get back to you.');
+      return;
+    }
+
     setStatus('loading');
     setFeedbackMessage('');
 
@@ -109,7 +115,7 @@ export default function Contact() {
 
       if (response.ok && data.success) {
         setStatus('success');
-        setFeedbackMessage(data.message || 'Thank you! Your message has been sent successfully.');
+        setFeedbackMessage(data.message || 'Thank you for reaching out! Your message has been sent directly to Sneh.');
         setFormData({
           name: '',
           email: '',
@@ -119,10 +125,9 @@ export default function Contact() {
         setStatus('error');
         setFeedbackMessage(data.error || 'Failed to send message. Please try again.');
       }
-    } catch (err) {
-      console.error('Contact submit error:', err);
+    } catch {
       setStatus('error');
-      setFeedbackMessage('Could not connect to the server. Please check your internet connection or email directly.');
+      setFeedbackMessage(`Could not connect to the server. Please check your connection or email directly at ${personalInfo.email}.`);
     }
   };
 
@@ -221,7 +226,7 @@ export default function Contact() {
                     LinkedIn
                   </span>
                   <span className="block text-sm font-bold text-slate-900 dark:text-white truncate">
-                    linkedin.com/in/sneh-gohil
+                    linkedin.com/in/sneh-gohil-8791a4311
                   </span>
                 </div>
               </a>
@@ -394,7 +399,7 @@ export default function Contact() {
                   {status === 'loading' ? (
                     <>
                       <Loader2 className="w-4 h-4 animate-spin" />
-                      <span>Sending Message via Nodemailer...</span>
+                      <span>Sending Message...</span>
                     </>
                   ) : (
                     <>
